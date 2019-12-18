@@ -9,11 +9,14 @@ let reducer = (state, action) => {
   if (action.type === "maximum-price") {
     return { ...state, max: action.price };
   }
+  if (action.type === "in-stock") {
+    return { ...state, inStockChecked: action.checked };
+  }
   return state;
 };
 const store = createStore(
   reducer,
-  { searchQuery: "", min: 0, max: 100000 },
+  { searchQuery: "", min: 0, max: 100000, inStockChecked: false },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 export default store;

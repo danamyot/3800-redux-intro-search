@@ -5,12 +5,18 @@ class UnconnectedSearch extends Component {
     this.props.dispatch({ type: "query", q: evt.target.value });
   };
   handleMinimumPrice = evt => {
-    let price = parseInt(evt.target.value) || 0;
+    const price = parseInt(evt.target.value) || 0;
     this.props.dispatch({ type: "minimum-price", price: price });
   };
   handleMaximumPrice = evt => {
-    let price = parseInt(evt.target.value) || 0;
+    const price = parseInt(evt.target.value) || 0;
     this.props.dispatch({ type: "maximum-price", price: price });
+  };
+  handleInStock = () => {
+    this.props.dispatch({
+      type: "in-stock",
+      checked: !this.props.inStockChecked
+    });
   };
   render = () => {
     return (
@@ -39,6 +45,14 @@ class UnconnectedSearch extends Component {
             value={this.props.maxPrice}
           />
         </div>
+        <div>
+          Only show in-stock
+          <input
+            type="checkbox"
+            onChange={this.handleInStock}
+            checked={this.props.inStockChecked}
+          />
+        </div>
       </div>
     );
   };
@@ -47,7 +61,8 @@ let mapStateToProps = st => {
   return {
     query: st.searchQuery,
     minPrice: st.min,
-    maxPrice: st.max
+    maxPrice: st.max,
+    inStockChecked: st.inStockChecked
   };
 };
 let Search = connect(mapStateToProps)(UnconnectedSearch);

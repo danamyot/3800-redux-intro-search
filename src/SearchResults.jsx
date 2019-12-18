@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import data from "./data.js";
 class UnconnectedSearchResults extends Component {
   render = () => {
-    let results = data.filter(item => {
+    const results = data.filter(item => {
       const matchingItem = item.name.includes(this.props.query);
       const priceInRange =
         item.price >= this.props.minPrice && item.price <= this.props.maxPrice;
@@ -12,18 +12,22 @@ class UnconnectedSearchResults extends Component {
     return (
       <div>
         {results.map(r => {
+          if (this.props.inStockChecked) {
+            return r.inStock ? <div>{r.name}</div> : null;
+          }
           return <div>{r.name}</div>;
         })}
       </div>
     );
   };
 }
-let mapStateToProps = st => {
+const mapStateToProps = st => {
   return {
     query: st.searchQuery,
     minPrice: st.min,
-    maxPrice: st.max
+    maxPrice: st.max,
+    inStockChecked: st.inStockChecked
   };
 };
-let SearchResults = connect(mapStateToProps)(UnconnectedSearchResults);
+const SearchResults = connect(mapStateToProps)(UnconnectedSearchResults);
 export default SearchResults;
