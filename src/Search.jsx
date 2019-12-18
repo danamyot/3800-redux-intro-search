@@ -5,11 +5,11 @@ class UnconnectedSearch extends Component {
     this.props.dispatch({ type: "query", q: evt.target.value });
   };
   handleMinimumPrice = evt => {
-    let price = parseInt(evt.target.value);
+    let price = parseInt(evt.target.value) || 0;
     this.props.dispatch({ type: "minimum-price", price: price });
   };
   handleMaximumPrice = evt => {
-    let price = parseInt(evt.target.value);
+    let price = parseInt(evt.target.value) || 0;
     this.props.dispatch({ type: "maximum-price", price: price });
   };
   render = () => {
