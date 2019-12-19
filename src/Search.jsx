@@ -40,30 +40,43 @@ class UnconnectedSearch extends Component {
             value={this.props.query}
           />
           <button onClick={this.clearForm}>Clear</button>
+          <div>
+            <button
+              onClick={() =>
+                document
+                  .querySelector(".advanced-params")
+                  .classList.toggle("show")
+              }
+            >
+              Advanced
+            </button>
+          </div>
         </div>
-        <div>
-          Minimum price
-          <input
-            type="text"
-            onChange={this.handleMinimumPrice}
-            value={this.props.minPrice}
-          />
-        </div>
-        <div>
-          Maximum price
-          <input
-            type="text"
-            onChange={this.handleMaximumPrice}
-            value={this.props.maxPrice}
-          />
-        </div>
-        <div>
-          Only show in-stock
-          <input
-            type="checkbox"
-            onChange={this.handleInStock}
-            checked={this.props.inStockChecked}
-          />
+        <div className="advanced-params">
+          <div>
+            Minimum price
+            <input
+              type="text"
+              onChange={this.handleMinimumPrice}
+              value={this.props.minPrice}
+            />
+          </div>
+          <div>
+            Maximum price
+            <input
+              type="text"
+              onChange={this.handleMaximumPrice}
+              value={this.props.maxPrice}
+            />
+          </div>
+          <div>
+            Only show in-stock
+            <input
+              type="checkbox"
+              onChange={this.handleInStock}
+              checked={this.props.inStockChecked}
+            />
+          </div>
         </div>
       </div>
     );
