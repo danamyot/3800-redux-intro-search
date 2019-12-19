@@ -18,6 +18,17 @@ class UnconnectedSearch extends Component {
       checked: !this.props.inStockChecked
     });
   };
+  clearForm = () => {
+    this.props.dispatch({ type: "query", q: "" });
+    this.props.dispatch({ type: "minimum-price", price: 0 });
+    this.props.dispatch({ type: "maximum-price", price: 100000 });
+    if (this.props.inStockChecked) {
+      this.props.dispatch({
+        type: "in-stock",
+        checked: !this.props.inStockChecked
+      });
+    }
+  };
   render = () => {
     return (
       <div>
@@ -28,6 +39,7 @@ class UnconnectedSearch extends Component {
             onChange={this.handleQuery}
             value={this.props.query}
           />
+          <button onClick={this.clearForm}>Clear</button>
         </div>
         <div>
           Minimum price
